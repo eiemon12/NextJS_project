@@ -33,28 +33,17 @@ export default function CreateBusInfo() {
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length === 0) {
         try {
-            const formDataObject = new FormData();
-            formDataObject.append('operatorName', formData.operatorName);
-            formDataObject.append('coachType', formData.coachType);
-            formDataObject.append('coachNumber', formData.coachNumber);
-            formDataObject.append('totalSit', formData.totalSit);
-            formDataObject.append('route', formData.route);
-            formDataObject.append('time', formData.time);
-
-            console.log(formDataObject);
-
-            const response = await axios.post('http://localhost:4000/customerSupport/createBusInfo',formDataObject);
+            const response = await axios.post('http://localhost:4000/customerSupport/createBusInfo', formData);
             toast.success('Bus information added successfully!');
             router.push('/customerSupport/getAllBuses');
-        }catch (error) {
+        } catch (error) {
             console.error('Error adding bus information:', error);
             toast.error('Failed to add bus information. Please try again.');
-          }
-    }else {
+        }
+    } else {
         setErrors(validationErrors);
-    
     }
-    };
+};
 
 
 
